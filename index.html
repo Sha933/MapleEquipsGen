@@ -16,10 +16,6 @@
 </br>
   
 
-<label>Scale:</label>
-<input type="text" id="scaleBox" value="1" oninput="reload()">
-</br>
-
 <!-- Textbox -->
 <h2>STEP 1: Load Image + Name</h2>
 <p>Go to <a href="https://maplestory.wiki/GMS/207.1.1/item?overallCategory=Equip&page=1&category=Armor&subCategory=Bottom">MapleStory.wiki</a> and search for your item.</a>
@@ -141,6 +137,17 @@ Copy the ID from the URL to the following text box.
   <input type="text" id="upgradesAvailable" value="0" class="value-input" oninput="reload()">
   </div>
 </div>
+
+
+<h2>STEP 7 (Optional): Change size</h2>
+
+<label>Scale:</label>
+<input type="text" id="scaleBox" value="1" oninput="reload()">
+</br>
+
+<h2>STEP 8: Save</h2>
+<p>Right click the image above -> "Save as"</p>
+
 
 
   <script>
@@ -604,13 +611,13 @@ Copy the ID from the URL to the following text box.
           console.error('Fetch error:', error);
         });
       }
-        // Function to be called when the button is pressed
-      function loadData() {
-        // Get the value from the textbox
-        var inputValue = document.getElementById("myTextbox").value;
-        // Call the "load" function with the textbox value as a parameter
-        load(inputValue);
-      }
+    // Function to be called when the button is pressed
+    function loadData() {
+      // Get the value from the textbox
+      var inputValue = document.getElementById("myTextbox").value;
+      // Call the "load" function with the textbox value as a parameter
+      load(inputValue);
+    }
       
     function reload() {
       loadData()
