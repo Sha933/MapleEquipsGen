@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      /* You can use a generic font family like 'sans-serif' as a fallback. */
+    }
+  </style>
+</head>
+</head>
+<body>
+  <canvas id="myCanvas" width="234" height="310"></canvas>
+</br>
+  
+
+<label>Scale:</label>
+<input type="text" id="scaleBox" value="1" oninput="reload()">
+</br>
+
+<!-- Textbox -->
+<h2>STEP 1: Load Image + Name</h2>
+<p>Go to <a href="https://maplestory.wiki/GMS/207.1.1/item?overallCategory=Equip&page=1&category=Armor&subCategory=Bottom">MapleStory.wiki</a> and search for your item.</a>
+</br>
+Copy the ID from the URL to the following text box.
+</p>
+<img src="tutorial1.png" height=""/>
+<br>
+<label>Item ID:</label>
+<input type="text" id="myTextbox" placeholder="Enter text" value="1382012">
+<!-- Button -->
+<button onclick="loadData()">Load Data</button>
+
+<br>
+<br>
+<h2>STEP 2: Modify Title</h2>
+<span>
+  <Label>Applied Scrolls</Label>
+  <input id="appliedScrolls" value="(+8)"  oninput="reload()">
+</span>
+<div>
+  <Label>Item title color:</Label>
+  <input id="titleColor" value="yellow"  oninput="reload()">
+  <br>
+  <label style="font-size: 11px"> Possible Values (css syntax): "yellow", "white", rgba(100,255,255), #FF6600 ...</label>
+</div>
+
+<h3>STEP 3: Modify Rarity</h3>
+  <label><input type="radio" name="rarity" value="none" checked oninput="reload()">(none)</label> 
+  <label><input type="radio" name="rarity" value="rare" oninput="reload()" checked> Rare</label>
+  <label><input type="radio" name="rarity" value="unique" oninput="reload()"> Unique</label>
+  <label><input type="radio" name="rarity" value="epic" oninput="reload()"> Epic</label>
+<br>
+
+<h3>STEP 4: Modify special coditions</h3>
+<input type="checkbox" checked id="oneOfKind" oninput="reload()">
+<label for="oneOfKind">One of a kind</label>
+<br>
+<input type="checkbox" checked id="untradeable" oninput="reload()">
+<label for="untradeable">Untradeable</label>
+<br>
+<input type="checkbox" id="uniqueEquipped" oninput="reload()">
+<label for="uniqueEquipped">Unique Equipped</label>
+
+
+<h2>STEP 5: Set allowed classes</h2>
+<input type="checkbox" checked id="beginner" oninput="reload()">
+<label for="beginner">Beginner</label>
+<input type="checkbox" checked id="warrior" oninput="reload()">
+<label for="warrior">Warrior</label>
+<input type="checkbox" checked id="magician" oninput="reload()">
+<label for="magician">Magician</label>
+<input type="checkbox" checked id="bowman" oninput="reload()">
+<label for="bowman">Bowman</label>
+<input type="checkbox" checked id="thief" oninput="reload()">
+<label for="thief">Thief</label>
+<input type="checkbox" checked id="pirate" oninput="reload()">
+<label for="pirate">Pirate</label>
+
+
+<h2>STEP 6: Modify Details</h2>
+<div class="input-pair-container">
+  <span class="input-pair">
+    <input type="text" size="40" id="categoryLabel" class="label-input" value="CATEGORY" oninput="reload()">
+    <input type="text" id="category" value="HAT" class="value-input" oninput="reload()">
+  </span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="strCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="strLabel" class="label-input" value="STR" oninput="reload()">
+  <input type="text" id="str" value="+25" class="value-input" oninput="reload()">
+  </span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="dexCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="dexLabel" class="label-input" value="DEX" oninput="reload()">
+  <input type="text" id="dex" value="+1" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="intCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="intLabel" class="label-input" value="INT" oninput="reload()">
+  <input type="text" id="int" value="+1" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="lukCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="lukLabel" class="label-input" value="LUK" oninput="reload()">
+  <input type="text" id="int" value="+1" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="weaponDefCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="weaponDefLabel" class="label-input" value="WEAPON DEF" oninput="reload()">
+  <input type="text" id="weaponDef" value="50" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="magicDefCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="magicDefLabel" class="label-input" value="MAGIC DEF" oninput="reload()">
+  <input type="text" id="magicDef" value="60" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="accuracyCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="accuracyLabel" class="label-input" value="ACCURACY" oninput="reload()">
+  <input type="text" id="accuracy" value="+20" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="avoidabilityCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="avoidabilityLabel" class="label-input" value="AVOIDABILITY" oninput="reload()">
+  <input type="text" id="avoidability" value="+20" class="value-input" oninput="reload()">
+</span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="upgradesAvailableCheckbox"  class="checkbox-input"  oninput="reload()">
+  <input type="text" size="40" id="upgradesAvailableLabel" class="label-input" value="NUMBER OF UPGRADES AVAILABLE" oninput="reload()">
+  <input type="text" id="upgradesAvailable" value="0" class="value-input" oninput="reload()">
+  </div>
+</div>
+
+
+  <script>
+    function get_yes_no(element_id) {
+      return document.getElementById(element_id).checked ? "y" : "n";
+    }
+
+
+    function get_rarity() {
+      var selectedRarity = document.querySelector('input[name="rarity"]:checked').value;
+      var result = "";
+
+      if (selectedRarity === "rare") {
+        result = "(Rare Item)";
+      } else if (selectedRarity === "unique") {
+        result = "(Unique Item)";
+      } else if (selectedRarity === "epic") {
+        result = "(Epic Item)";
+      }
+      return result;
+    }
+
+
+
+    function myFunction(megaJson) {
+        console.error("myFunction entered!");
+        const canvas = document.getElementById("myCanvas");
+        let ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let modifier = parseFloat(document.getElementById("scaleBox").value);
+        if (isNaN(modifier)) {
+            modifier = 1;
+        }
+        // Load the image
+        let bgn_file = "bgn_" + get_yes_no("beginner") + ".png"
+        let war_file = "war_" + get_yes_no("warrior") + ".png"
+        let mag_file = "mag_" + get_yes_no("magician") + ".png"
+        let bow_file = "bow_" + get_yes_no("bowman") + ".png"
+        let thi_file = "thi_" + get_yes_no("thief") + ".png"
+        let pir_file = "pir_" + get_yes_no("pirate") + ".png"
+        function do_classes(offset) {
+          let y_off = offset;
+          const characters = [
+            { name: 'BEGINNER', file: bgn_file, x: 10, y: y_off },
+            { name: 'WARRIOR', file: war_file, x: 52, y: y_off },
+            { name: 'MAGICIAN', file: mag_file, x: 92, y: y_off },
+            { name: 'BOWMAN', file: bow_file, x: 132, y: y_off },
+            { name: 'THIEF', file: thi_file, x: 171, y: y_off },
+            { name: 'PIRATE', file: pir_file, x: 197, y: y_off },
+          ];
+
+          ctx.imageSmoothingEnabled = false;
+          characters.forEach(character => {
+            const img = new Image();
+            img.src = character.file;
+            img.onload = function() {
+              ctx.drawImage(
+                img,
+                character.x * modifier,
+                character.y,
+                img.width * modifier,
+                img.height * modifier
+              );
+            };
+          });
+        }
+
+        function drawPixelArtBorder(x0, y0, width, height) {
+          // Draw outer border
+          x1 = x0 + width;
+          y1 = y0 + height
+          ctx.imageSmoothingEnabled = false;
+          // Draw blank pixels at each corner
+          // Undoing previous half-pixel alighnment for other drawing to work as expected
+          let pixelWidth = 1 * modifier;
+          let pixelHeight = 1 * modifier;
+          ctx.translate(pixelWidth/2, pixelWidth/2);
+          ctx.lineWidth = pixelWidth;
+          ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
+
+          ctx.strokeRect(x0 + pixelWidth, y0 + pixelWidth, pixelWidth, pixelHeight); // Top-left corner
+          ctx.strokeRect(x1 - ( 2 * pixelWidth), y0 + pixelWidth, pixelWidth, pixelHeight); // Top-right corner
+          ctx.strokeRect(x0 + pixelWidth, y1 - ( 2 * pixelWidth), pixelWidth, pixelHeight); // Bottom-left corner
+          ctx.strokeRect(x1 - ( 2 * pixelWidth), y1 - ( 2 * pixelWidth), pixelWidth, pixelHeight); // Bottom-right corner.
+
+          ctx.translate(-pixelWidth/2, -pixelWidth/2);
+
+           // Top-left corner
+          ctx.clearRect(x0, y0, pixelWidth, pixelHeight);
+          ctx.clearRect(x0+(2 * modifier), y0+(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x0+ (1 * modifier), y0+(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x0+(2 * modifier), y0+ (1 * modifier), pixelWidth, pixelHeight);
+
+          // Top-right corner
+          ctx.clearRect(x1, y0, pixelWidth, pixelHeight);
+          ctx.clearRect(x1-(2 * modifier), y0+(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x1- (1 * modifier), y0+(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x1-(2 * modifier), y0+ (1 * modifier), pixelWidth, pixelHeight);
+
+          // Bottom-left corner
+          ctx.clearRect(x0, y1, pixelWidth, pixelHeight);
+          ctx.clearRect(x0+(2 * modifier), y1-(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x0+ (1 * modifier), y1-(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x0+(2 * modifier), y1- (1 * modifier), pixelWidth, pixelHeight);
+
+          // Bottom-right corner
+          ctx.clearRect(x1, y1, pixelWidth, pixelHeight);
+          ctx.clearRect(x1-(2 * modifier), y1-(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x1- (1 * modifier), y1-(2 * modifier), pixelWidth, pixelHeight);
+          ctx.clearRect(x1-(2 * modifier), y1- (1 * modifier), pixelWidth, pixelHeight);2
+        }
+
+        // Load the BLUE TRANSPARENT BACKGROUND image
+        ctx.imageSmoothingEnabled = false;
+        //ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+
+        var x = 1 * modifier;
+        var y = 1 * modifier;
+        var radius = 2;
+
+        // Item Name
+        let fontSize = 12  * modifier;
+        var titleColor = document.getElementById("titleColor").value;
+
+        var appliedScrolls = document.getElementById("appliedScrolls").value;
+        let itemNameText = megaJson.description.name +" " + appliedScrolls;
+        let itemNameTextX = 17 * modifier;
+        let itemNameTextY = 21 * modifier;
+        
+        // Orange Modifiers
+        let rarityText = get_rarity();
+        let offset = 17 * modifier;
+        rarityTextY_offset = offset;
+        if (rarityText != "") {
+          offset += 17 * modifier;
+        }
+
+        // Orange Modifiers
+        let orangeModifiersText = "";
+        if (document.getElementById("oneOfKind").checked) {
+          orangeModifiersText += "One-of-a-kind Item";
+        }
+        if (document.getElementById("untradeable").checked) {
+          if (orangeModifiersText != "")
+            orangeModifiersText += ", "
+          orangeModifiersText += "Untradeable";
+        }
+        if (document.getElementById("uniqueEquipped").checked) {
+          if (orangeModifiersText != "")
+            orangeModifiersText += ", "
+          orangeModifiersText += "Unique Equipped Item";
+        }
+        orangeModifiersTextY_offset = offset;
+        if (orangeModifiersText != "") {
+          offset += 17 * modifier;
+        }
+
+        // Text information array
+        const textLines = composeFields()
+
+        totalDynamicLengths = (textLines.length * 13 * modifier) + offset;
+
+
+        // -------------> ACTUAL DRAWING STARTS HERE <---------------------
+        // BLUE BORDER
+        canvas.width = 236 * modifier;
+        canvas.height = (149 * modifier) + totalDynamicLengths;
+        ctx.strokeStyle = 'rgba(53, 59, 129, 0.86)';
+        drawPixelArtBorder(0, 0, canvas.width - (1 * modifier), canvas.height - (1 * modifier))
+
+        // BLUE BACKGROUND
+        ctx.fillStyle = 'rgba(53, 59, 129, 0.86)';
+        ctx.fillRect(2 * modifier, 2 * modifier, canvas.width - (4 * modifier),canvas.height - (4 * modifier)); 
+
+        // ITEM NAME
+        ctx.fillStyle = titleColor;
+        ctx.font = `${fontSize}px Arial`;
+        ctx.fillText(itemNameText, itemNameTextX, itemNameTextY);
+
+        // ITEM RARITY
+        if (rarityText != "") {
+          ctx.fillStyle = 'white';
+          ctx.font = `${fontSize}px Arial`;
+          rarityTextX = (canvas.width/2);
+          rarityTextY = rarityTextY_offset + (22 * modifier);
+          let rarityLength = ctx.measureText(rarityText).width;
+          ctx.fillText(rarityText, rarityTextX - (rarityLength/2), rarityTextY);
+        }
+        
+        // ORANGE TEXT MODIFIERS (Untradable, ...)
+        if (orangeModifiersText != "") {
+          ctx.fillStyle = 'orange';
+          ctx.font = `${fontSize}px Arial`;
+          orangeModifiersTextX = (canvas.width/2);
+          orangeModifiersTextY = orangeModifiersTextY_offset + (22 * modifier);
+          let specialConfitionsLength = ctx.measureText(orangeModifiersText).width;
+          ctx.fillText(orangeModifiersText, orangeModifiersTextX - (specialConfitionsLength/2), orangeModifiersTextY);
+        }
+
+
+        // Item's Image GRAY BOX BACKGROUND
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.66)'; // Set the fill color
+        ctx.fillRect(/* x */ 10 * modifier,
+                    /* y */ offset + (15 * modifier),
+                    68 * modifier,
+                    68 * modifier); 
+          
+        // REQUIRED STATS BLOCK
+        let statsImage = new Image();
+        statsImage.src = 'stats.png';
+        statsImage.onload = function() { 
+            ctx.drawImage(statsImage, 94 * modifier,
+              /* y */ offset + (15 * modifier), 
+              statsImage.width * modifier,
+              statsImage.height * modifier);
+        }
+          // Now after the background (blueish) and item-background (gray)
+          // are drawn, we can try to get the image from that other MS website
+          const itemImage = new Image();
+          itemImage.crossOrigin = "Anonymous";
+          itemImage.onload = function() {
+            console.error("Got item's image back from MS.io!");
+            ctx.drawImage(itemImage,
+                          (45 - (itemImage.width/2)) * modifier,
+                          offset + (47 - (itemImage.height/2)) * modifier,
+                          itemImage.width  * modifier,
+                          itemImage.height  * modifier);
+          };
+          // Handle errors during image loading
+          itemImage.onerror = function() {
+            console.error("Failed to load the item's image.");
+          };
+          console.error(""+megaJson.id);
+          let imageUrl = 'https://maplestory.io/api/GMS/207.1.1/item/'+ megaJson.id +'/icon?resize=2'; // Replace with the path to your image
+          itemImage.src = imageUrl;
+
+
+        // CLASSES INDICATORS
+        do_classes((116 * modifier) + offset);
+        
+        // WHITE SEPARATOR
+        ctx.fillStyle = 'white';
+        ctx.fillRect(6 * modifier, (135 * modifier) + offset, canvas.width - (12 * modifier), 1 * modifier); 
+
+        // Write DESCRIPTION (bottom area)
+        // Set the initial Y coordinate
+        let lineY = 151 * modifier + offset;
+        // Iterate through the textLines array and draw each line
+        //ctx.translate(0.5, 0.5);
+        textLines.forEach(line => {
+            let fontSize = 9 * modifier;
+            ctx.font = `${fontSize}px Arial`;
+            ctx.fillStyle = 'white'
+            // Draw the label
+            let label_x = 18 * modifier;
+            ctx.fillText(line.label, label_x, lineY);
+            // Draw the value
+            ctx.font = `bold ${line.fontSize}px Arial`;
+            let labelWidth = ctx.measureText(line.label).width;
+            let valX = label_x + labelWidth + (2 * modifier);
+            if (line.fixedValueX !== undefined) 
+            {
+                valX = line.fixedValueX;
+            }
+            ctx.fillText(line.value, valX, lineY); // Adjust the X coordinate as needed
+            
+            // Draw little orange plus before label
+            ctx.font = 'bold ' + (6 * modifier) + 'px Arial';
+            ctx.fillStyle = '#FF6600'
+            ctx.translate(0.5, 0.5);
+            ctx.fillText("+", 9 * modifier, lineY - 2);
+            ctx.translate(-0.5, -0.5);
+            // Update the Y coordinate for the next line
+            lineY += 13 * modifier; // You can adjust the spacing between lines as needed
+          });
+
+
+
+
+          function drawText(context, text, x, y, fontSize, fontFamily, color) {
+            // Create an off-screen canvas
+            var offScreenCanvas = document.createElement('canvas');
+            var offScreenContext = offScreenCanvas.getContext('2d');
+
+            // Set the off-screen canvas size
+            offScreenCanvas.width = context.canvas.width;
+            offScreenCanvas.height = context.canvas.height;
+
+            // Set anti-aliasing to "none" on the off-screen context
+            offScreenContext.imageSmoothingEnabled = true;
+
+            // Draw text on the off-screen canvas
+            offScreenContext.font = (fontSize) + 'px ' + fontFamily;
+            offScreenContext.fillStyle = color;
+            for (let i = 0; i < 500; i++) {
+              offScreenContext.fillText(text, x, y);
+            }
+            
+
+            // Draw the off-screen canvas onto the main canvas
+            context.drawImage(offScreenCanvas, 0, 0);
+          }
+
+        };
+      
+
+
+
+      function load(itemNumber)
+      {
+      // URL of the JSON endpoint (replace with the actual URL)
+      const apiUrl = 'https://maplestory.io/api/GMS/207.1.1/item/' + itemNumber;
+  
+
+
+
+      // Make a GET request to fetch the JSON data
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Access the "description" -> "name" field
+          const name = data.description.name;
+  
+          // Do something with the name, for example, log it to the console
+          console.log(`Name: ${name}`);
+          myFunction(data);
+          console.log(`myFunction returned`);
+        })
+        .catch(error => {
+          // Handle errors during the fetch operation
+          console.error('Fetch error:', error);
+        });
+      }
+        // Function to be called when the button is pressed
+      function loadData() {
+        // Get the value from the textbox
+        var inputValue = document.getElementById("myTextbox").value;
+        // Call the "load" function with the textbox value as a parameter
+        load(inputValue);
+      }
+      
+    function reload() {
+      loadData()
+    }
+    reload()
+    function composeFields() {
+      const textLines = [];
+      // Get all elements with the class "input-pair"
+      const inputPairs = document.getElementsByClassName("input-pair");
+      // Iterate over the input pairs
+      for (let i = 0; i < inputPairs.length; i++) {
+        const labelInput = inputPairs[i].querySelector('.label-input');
+        const checkboxInput = inputPairs[i].querySelector('.checkbox-input');
+        const valueInput = inputPairs[i].querySelector('.value-input');
+        const label = labelInput.value +" : ";
+        const value = valueInput.value;
+        // Check if checkboxInput is defined before accessing its properties
+        const isChecked = checkboxInput ? checkboxInput.checked : true;
+        // Add the line only if the checkbox is checked
+        if (isChecked) {
+          textLines.push({ label, value });
+        }
+      }
+      // Display the resulting textLines array in the console (you can replace this with your actual logic)
+      return textLines;
+    }
+  </script>
+</body>
+</html>
