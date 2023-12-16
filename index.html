@@ -144,10 +144,34 @@ Copy the ID from the URL to the following text box.
 
 
   <script>
+    let req = [];
+    count = 0;
+    const loadReqDigits = () => {
+      return new Promise((resolve, reject) => {
+        req_dash = new Image();
+        req_dash.onload = () => {
+          count += 1;
+          console.error("COUNT:" + count);
+          if (count == 10)
+            resolve()
+        }
+        req_dash.src = 'req_dash.png';
+        for (let i = 0; i <= 9; i++) {
+            let image = new Image();
+            image.onload = () => {
+              count += 1;
+              if (count == 10)
+                resolve()
+            }
+            image.src = `req_${i}.png`;
+            req.push(image);
+        }
+      })
+    };
+
     function get_yes_no(element_id) {
       return document.getElementById(element_id).checked ? "y" : "n";
     }
-
 
     function get_rarity() {
       var selectedRarity = document.querySelector('input[name="rarity"]:checked').value;
@@ -163,6 +187,9 @@ Copy the ID from the URL to the following text box.
       return result;
     }
 
+    let required_str = 0;
+
+
 
 
     function myFunction(megaJson) {
@@ -174,7 +201,63 @@ Copy the ID from the URL to the following text box.
         if (isNaN(modifier)) {
             modifier = 1;
         }
-        // Load the image
+
+
+        
+        function renderNumber(number, context, x, y) {
+            // Check if the number is 0 or undefined
+            if (number == 0 || number === undefined) {
+                // Draw the dash image at the specified location
+                context.drawImage(req_dash, x, y, req_dash.naturalWidth, req_dash.naturalHeight);
+                return;
+            }
+
+            // Convert the number to a string to access each digit
+            const numberStr = number.toString();
+            // Iterate through each digit and render the corresponding image
+            for (let i = 0; i < numberStr.length; i++) {
+                // Get the digit at the current position
+                const digit = parseInt(numberStr[i]);
+
+                // Check if the digit is a valid index in the req array
+                if (!isNaN(digit) && digit >= 0 && digit <= 9) {
+                    // Draw the image at the specified location
+                    context.drawImage(req[digit], 
+                    x, 
+                    y, 
+                    req[digit].naturalWidth * modifier, 
+                    req[digit].naturalHeight * modifier);
+                    // Adjust the positioning based on your requirements
+                }
+                x += req[digit].naturalWidth * modifier
+                x += 1 * modifier; // one pixel padding between digits
+            }
+        }
+
+        function setClassesCheckboxes(bitmask) {
+        if (bitmask == 0 || bitmask == undefined)
+        {
+          document.getElementById("beginner").checked = true;
+          bitmask = 0xffff;
+        }
+        else {
+          document.getElementById("beginner").checked = false;
+        }
+        // List of checkbox IDs
+        const checkboxIds = ['warrior', 'magician', 'bowman', 'thief', 'pirate'];
+
+        // Loop through each checkbox
+        for (let i = 0; i < checkboxIds.length; i++) {
+          const checkboxId = checkboxIds[i];
+          // Check if the corresponding bit is set in the bitmask
+          const isBitSet = (bitmask & (1 << i)) !== 0;
+          // Update the checkbox state based on the bitmask
+          document.getElementById(checkboxId).checked = isBitSet;
+        }
+      }
+
+        console.error("megaJson.metaInfo.reqJob ===" + megaJson.metaInfo.reqJob);
+        setClassesCheckboxes(megaJson.metaInfo.reqJob);
         let bgn_file = "bgn_" + get_yes_no("beginner") + ".png"
         let war_file = "war_" + get_yes_no("warrior") + ".png"
         let mag_file = "mag_" + get_yes_no("magician") + ".png"
@@ -253,10 +336,7 @@ Copy the ID from the URL to the following text box.
           ctx.clearRect(x1-(2 * modifier), y1- (1 * modifier), pixelWidth, pixelHeight);2
         }
 
-        // Load the BLUE TRANSPARENT BACKGROUND image
         ctx.imageSmoothingEnabled = false;
-        //ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-
         var x = 1 * modifier;
         var y = 1 * modifier;
         var radius = 2;
@@ -267,9 +347,9 @@ Copy the ID from the URL to the following text box.
 
         var appliedScrolls = document.getElementById("appliedScrolls").value;
         let itemNameText = megaJson.description.name +" " + appliedScrolls;
-        let itemNameTextX = 17 * modifier;
-        let itemNameTextY = 21 * modifier;
-        
+        let itemNameTextX = 18 * modifier;
+        let itemNameTextY = 22 * modifier;
+
         // Orange Modifiers
         let rarityText = get_rarity();
         let offset = 17 * modifier;
@@ -320,6 +400,20 @@ Copy the ID from the URL to the following text box.
         ctx.font = `${fontSize}px Arial`;
         ctx.fillText(itemNameText, itemNameTextX, itemNameTextY);
 
+        // Draw small blue circle next to item name
+        var centerX = 13 * modifier;
+        var centerY = 17 * modifier;
+        radius = 2.3 * modifier;
+        var fillColor = "#55CCFF";
+        // Draw the circle
+        ctx.translate(-0.5, +0.5);
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+        ctx.closePath();
+        ctx.translate(+0.5, -0.5);
+
         // ITEM RARITY
         if (rarityText != "") {
           ctx.fillStyle = 'white';
@@ -352,11 +446,45 @@ Copy the ID from the URL to the following text box.
         let statsImage = new Image();
         statsImage.src = 'stats.png';
         statsImage.onload = function() { 
-            ctx.drawImage(statsImage, 94 * modifier,
+            ctx.drawImage(statsImage, 
+              /* x */ 94 * modifier,
               /* y */ offset + (15 * modifier), 
               statsImage.width * modifier,
               statsImage.height * modifier);
         }
+
+        // REQ LEVEL
+        req_offset = offset
+        renderNumber(megaJson.metaInfo.reqLevelEquip, ctx, 
+              /* x */ 144 * modifier,
+              /* y */ req_offset + (15 * modifier))
+        req_offset += 12 * modifier;
+        // REQ STR
+        renderNumber(megaJson.metaInfo.reqSTR, ctx, 
+              /* x */ 144 * modifier,
+              /* y */ req_offset + (15 * modifier))
+        req_offset += 12 * modifier;
+        // REQ DEX
+        renderNumber(megaJson.metaInfo.reqDEX, ctx, 
+              /* x */ 144 * modifier,
+              /* y */ req_offset + (15 * modifier))
+        req_offset += 12 * modifier;
+        // REQ INT
+        renderNumber(megaJson.metaInfo.reqINT, ctx, 
+              /* x */ 144 * modifier,
+              /* y */ req_offset + (15 * modifier))
+        req_offset += 12 * modifier;
+        // REQ LUK
+        renderNumber(megaJson.metaInfo.reqLUK, ctx, 
+              /* x */ 144 * modifier,
+              /* y */ req_offset + (15 * modifier))
+        req_offset += 12 * modifier;
+        // REQ FAME
+        renderNumber(0, ctx, 
+              /* x */ 144 * modifier,
+              /* y */ req_offset + (15 * modifier))
+
+
           // Now after the background (blueish) and item-background (gray)
           // are drawn, we can try to get the image from that other MS website
           const itemImage = new Image();
@@ -465,10 +593,7 @@ Copy the ID from the URL to the following text box.
           }
           return response.json();
         })
-        .then(data => {
-          // Access the "description" -> "name" field
-          const name = data.description.name;
-  
+        .then(data => {  
           // Do something with the name, for example, log it to the console
           console.log(`Name: ${name}`);
           myFunction(data);
@@ -490,7 +615,9 @@ Copy the ID from the URL to the following text box.
     function reload() {
       loadData()
     }
-    reload()
+    
+    loadReqDigits("unused").then(()=> reload());
+
     function composeFields() {
       const textLines = [];
       // Get all elements with the class "input-pair"
