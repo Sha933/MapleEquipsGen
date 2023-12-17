@@ -13,6 +13,7 @@
 </head>
 <body>
   <canvas id="myCanvas" width="234" height="310"></canvas>
+  <canvas id="onlyBackgroundCanvas" width="234" height="310"></canvas>
 </br>
   
 
@@ -146,6 +147,10 @@ Copy the ID from the URL to the following text box.
 </br>
 
 <h2>STEP 8: Save</h2>
+<span hidden>x
+  <input type="checkbox" id="split" oninput="reload()">
+  <label for="split">Split background from other elements</label>
+</span>
 <p>Right click the image above -> "Save as"</p>
 
 
@@ -202,14 +207,19 @@ Copy the ID from the URL to the following text box.
     function myFunction(megaJson) {
         console.error("myFunction entered!");
         const canvas = document.getElementById("myCanvas");
+        let backGroundcanvas = document.getElementById("myCanvas");
+        if (document.getElementById("split").checked)
+        {
+          backGroundcanvas = document.getElementById("onlyBackgroundCanvas");
+        }
         let ctx = canvas.getContext("2d");
+        let backgroundCtx = backGroundcanvas.getContext("2d");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        backgroundCtx.clearRect(0, 0, canvas.width, canvas.height);
         let modifier = parseFloat(document.getElementById("scaleBox").value);
         if (isNaN(modifier)) {
             modifier = 1;
         }
-
-
         
         function renderNumber(number, context, x, y) {
             // Check if the number is 0 or undefined
@@ -298,7 +308,7 @@ Copy the ID from the URL to the following text box.
           });
         }
 
-        function drawPixelArtBorder(x0, y0, width, height) {
+        function drawPixelArtBorder(ctx, x0, y0, width, height) {
           // Draw outer border
           x1 = x0 + width;
           y1 = y0 + height
@@ -395,12 +405,26 @@ Copy the ID from the URL to the following text box.
         // BLUE BORDER
         canvas.width = 236 * modifier;
         canvas.height = (149 * modifier) + totalDynamicLengths;
-        ctx.strokeStyle = 'rgba(53, 59, 129, 0.86)';
-        drawPixelArtBorder(0, 0, canvas.width - (1 * modifier), canvas.height - (1 * modifier))
+        onlyBackgroundCanvas.width = 236 * modifier;
+        onlyBackgroundCanvas.height = (149 * modifier) + totalDynamicLengths;
+        backgroundCtx.strokeStyle = 'rgba(53, 59, 129, 0.86)';
+        drawPixelArtBorder(backgroundCtx, 0, 0, canvas.width - (1 * modifier), canvas.height - (1 * modifier))
+        
+        // Thin WHITE BORDER between blue parts
+        backgroundCtx.strokeStyle = 'white';
+        let pixelWidth = 1 * modifier;
+        let pixelHeight = 1 * modifier;
+        backgroundCtx.translate(pixelWidth/2, pixelWidth/2);
+        backgroundCtx.strokeRect(2,1,canvas.width - (5 * modifier), 0)
+        backgroundCtx.strokeRect(1,2,0, canvas.height - (5 * modifier))
+        backgroundCtx.strokeRect(2,canvas.height - (2 * modifier), canvas.width - (5 * modifier), 0)
+        backgroundCtx.strokeRect(canvas.width - 2, 2, 0, canvas.height - (5 * modifier))
+        backgroundCtx.translate(-pixelWidth/2, -pixelWidth/2);
+        
 
         // BLUE BACKGROUND
-        ctx.fillStyle = 'rgba(53, 59, 129, 0.86)';
-        ctx.fillRect(2 * modifier, 2 * modifier, canvas.width - (4 * modifier),canvas.height - (4 * modifier)); 
+        backgroundCtx.fillStyle = 'rgba(53, 59, 129, 0.86)';
+        backgroundCtx.fillRect(2 * modifier, 2 * modifier, canvas.width - (4 * modifier),canvas.height - (4 * modifier)); 
 
         // ITEM NAME
         ctx.fillStyle = titleColor;
@@ -528,11 +552,12 @@ Copy the ID from the URL to the following text box.
         textLines.forEach(line => {
             let fontSize = 9 * modifier;
             ctx.font = `${fontSize}px Arial`;
-            ctx.fillStyle = 'white'
+            ctx.fillStyle = '#ffeecc'
             // Draw the label
             let label_x = 18 * modifier;
             ctx.fillText(line.label, label_x, lineY);
             // Draw the value
+            ctx.fillStyle = 'white'
             ctx.font = `bold ${line.fontSize}px Arial`;
             let labelWidth = ctx.measureText(line.label).width;
             let valX = label_x + labelWidth + (2 * modifier);
