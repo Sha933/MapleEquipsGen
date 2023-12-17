@@ -292,7 +292,7 @@ Copy the ID from the URL to the following text box.
             // Check if the number is 0 or undefined
             if (number == 0 || number === undefined) {
                 // Draw the dash image at the specified location
-                context.drawImage(req_dash, x, y, req_dash.naturalWidth, req_dash.naturalHeight);
+                context.drawImage(req_dash, x, y, req_dash.naturalWidth * modifier, req_dash.naturalHeight * modifier);
                 return;
             }
 
