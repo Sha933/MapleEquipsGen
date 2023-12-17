@@ -147,12 +147,79 @@ Copy the ID from the URL to the following text box.
 </br>
 
 <h2>STEP 8: Save</h2>
-<span hidden>x
-  <input type="checkbox" id="split" oninput="reload()">
+<div>
+<p>Click the checkbox to enable saving:</p>
+  <input type="checkbox" id="split" oninput="splitReload()">
   <label for="split">Split background from other elements</label>
-</span>
-<p>Right click the image above -> "Save as"</p>
+</div>
+</br>
+<button id="saveButton" disabled>Save Background + Foreground</button>
 
+<script>
+
+    function splitReload() {
+      document.getElementById("saveButton").disabled = !document.getElementById("split").checked;
+      loadData()
+    }
+
+  document.addEventListener("DOMContentLoaded", function() {
+
+    // Get the save button element
+    var saveButton = document.getElementById("saveButton");
+
+    // Add click event listener to the save button
+    saveButton.addEventListener("click", function() {
+      // Get the canvas element and its 2d context
+      var canvas = document.getElementById("myCanvas");
+      let backGroundcanvas = document.getElementById("onlyBackgroundCanvas");
+      document.getElementById("split").checked = true;
+      // Get the data URL of the canvas
+      var dataURL = canvas.toDataURL("image/png");
+
+      // Create a link element
+      var link = document.createElement("a");
+
+      // Set the href attribute of the link to the data URL
+      link.href = dataURL;
+
+      // Set the download attribute with a desired filename
+      link.download = "foreground.png";
+
+      // Append the link to the document
+      document.body.appendChild(link);
+
+      // Trigger a click on the link to start the download
+      link.click();
+
+      // Remove the link from the document
+      document.body.removeChild(link);
+      
+      // Get the data URL of the canvas
+      var dataURL = backGroundcanvas.toDataURL("image/png");
+
+      // Create a link element
+      var link = document.createElement("a");
+
+      // Set the href attribute of the link to the data URL
+      link.href = dataURL;
+
+      // Set the download attribute with a desired filename
+      link.download = "background.png";
+
+      // Append the link to the document
+      document.body.appendChild(link);
+
+      // Trigger a click on the link to start the download
+      link.click();
+
+      // Remove the link from the document
+      document.body.removeChild(link);
+
+      
+      //document.getElementById("split").checked = false;
+    });
+  });
+</script>
 
 
   <script>
