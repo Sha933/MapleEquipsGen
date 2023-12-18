@@ -101,11 +101,17 @@ Copy the ID from the URL to the following text box.
   <input type="text" size="40" id="intLabel" class="label-input" value="INT" oninput="reload()">
   <input type="text" id="int" value="+1" class="value-input" oninput="reload()">
 </span>
-  <br>
-  <span class="input-pair">
-  <input type="checkbox" checked id="lukCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="lukLabel" class="label-input" value="LUK" oninput="reload()">
-  <input type="text" id="int" value="+1" class="value-input" oninput="reload()">
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="lukCheckbox"  class="checkbox-input"  oninput="reload()">
+<input type="text" size="40" id="lukLabel" class="label-input" value="LUK" oninput="reload()">
+<input type="text" id="int" value="+1" class="value-input" oninput="reload()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="hpCheckbox"  class="checkbox-input"  oninput="reload()">
+<input type="text" size="40" id="hpLabel" class="label-input" value="HP" oninput="reload()">
+<input type="text" id="int" value="10%" class="value-input" oninput="reload()">
 </span>
   <br>
   <span class="input-pair">
@@ -223,6 +229,41 @@ Copy the ID from the URL to the following text box.
 
 
   <script>
+
+    let stat = [];
+    count_stat = 0;
+    const loadStatDigits = () => {
+      return new Promise((resolve, reject) => {
+        stat_plus = new Image();
+        stat_plus.onload = () => {
+          count_stat += 1;
+          console.error("count_stat:" + count_stat);
+          if (count_stat == 12)
+            resolve()
+        }
+        stat_plus.src = 'stat_plus.png';
+        
+        stat_percent = new Image();
+        stat_percent.onload = () => {
+          count_stat += 1;
+          console.error("count_stat:" + count_stat);
+          if (count_stat == 12)
+            resolve()
+        }
+        stat_percent.src = 'stat_percent.png';
+        for (let i = 0; i <= 9; i++) {
+            let image = new Image();
+            image.onload = () => {
+              count_stat += 1;
+              if (count_stat == 12)
+                resolve()
+            }
+            image.src = `stat_${i}.png`;
+            stat.push(image);
+        }
+      })
+    };
+
     let req = [];
     count = 0;
     const loadReqDigits = () => {
@@ -231,7 +272,7 @@ Copy the ID from the URL to the following text box.
         req_dash.onload = () => {
           count += 1;
           console.error("COUNT:" + count);
-          if (count == 10)
+          if (count == 11)
             resolve()
         }
         req_dash.src = 'req_dash.png';
@@ -239,7 +280,7 @@ Copy the ID from the URL to the following text box.
             let image = new Image();
             image.onload = () => {
               count += 1;
-              if (count == 10)
+              if (count == 11)
                 resolve()
             }
             image.src = `req_${i}.png`;
@@ -288,7 +329,7 @@ Copy the ID from the URL to the following text box.
             modifier = 1;
         }
         
-        function renderNumber(number, context, x, y) {
+        function renderReqNumber(number, context, x, y) {
             // Check if the number is 0 or undefined
             if (number == 0 || number === undefined) {
                 // Draw the dash image at the specified location
@@ -316,6 +357,64 @@ Copy the ID from the URL to the following text box.
                 x += req[digit].naturalWidth * modifier
                 x += 1 * modifier; // one pixel padding between digits
             }
+        }
+
+        function containsOnlyAllowedChars(inputString) {
+          // Define a regular expression that matches only digits, plus sign, and percent sign
+          var regex = /^[+]?[0-9]+%?$/;
+
+          // Test if the input string matches the regular expression
+          return regex.test(inputString);
+        }
+
+        function renderStatValue(value, context, x, y) {
+          if (!containsOnlyAllowedChars(value)) {
+                return false;
+          }
+
+          // Fix pixel-allignment drawing
+          let pixelWidth = 1 * modifier;
+          //ctx.translate(pixelWidth/2, 0);
+
+
+          // Convert the number to a string to access each digit
+          const numberStr = value.toString();
+          // Iterate through each digit and render the corresponding image
+          for (let i = 0; i < numberStr.length; i++) {
+              // Get the digit at the current position
+              next_char = numberStr[i]
+              if (next_char == "+") {
+                context.drawImage(stat_plus, x, y, stat_plus.naturalWidth * modifier, stat_plus.naturalHeight * modifier);
+                x += stat_plus.naturalWidth * modifier
+                x += 2 * modifier; // one pixel padding between digits
+                continue;
+              }
+              if (next_char == "%") {
+                context.drawImage(stat_percent, x, y, stat_percent.naturalWidth * modifier, stat_percent.naturalHeight * modifier);
+                x += stat_percent.naturalWidth * modifier
+                x += 2 * modifier; // one pixel padding between digits
+                continue;
+              }
+
+              const digit = parseInt(next_char);
+
+              // Check if the digit is a valid index in the req array
+              if (!isNaN(digit) && digit >= 0 && digit <= 9) {
+                  // Draw the image at the specified location
+                  context.drawImage(stat[digit], 
+                  x, 
+                  y, 
+                  stat[digit].naturalWidth * modifier, 
+                  stat[digit].naturalHeight * modifier);
+                  // Adjust the positioning based on your requirements
+              }
+              x += stat[digit].naturalWidth * modifier
+              x += 2 * modifier; // one pixel padding between digits
+          }
+
+          // Undo previous 'translate'
+          //ctx.translate(-pixelWidth/2, 0);
+          return true;
         }
 
         function setClassesCheckboxes(bitmask) {
@@ -553,32 +652,32 @@ Copy the ID from the URL to the following text box.
 
         // REQ LEVEL
         req_offset = offset
-        renderNumber(megaJson.metaInfo.reqLevelEquip, ctx, 
+        renderReqNumber(megaJson.metaInfo.reqLevelEquip, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
         // REQ STR
-        renderNumber(megaJson.metaInfo.reqSTR, ctx, 
+        renderReqNumber(megaJson.metaInfo.reqSTR, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
         // REQ DEX
-        renderNumber(megaJson.metaInfo.reqDEX, ctx, 
+        renderReqNumber(megaJson.metaInfo.reqDEX, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
         // REQ INT
-        renderNumber(megaJson.metaInfo.reqINT, ctx, 
+        renderReqNumber(megaJson.metaInfo.reqINT, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
         // REQ LUK
-        renderNumber(megaJson.metaInfo.reqLUK, ctx, 
+        renderReqNumber(megaJson.metaInfo.reqLUK, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
         // REQ FAME
-        renderNumber(0, ctx, 
+        renderReqNumber(0, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
 
@@ -626,13 +725,13 @@ Copy the ID from the URL to the following text box.
             // Draw the value
             ctx.fillStyle = 'white'
             ctx.font = `bold ${line.fontSize}px Arial`;
-            let labelWidth = ctx.measureText(line.label).width;
+            let labelWidth = Math.ceil(ctx.measureText(line.label).width);
+            console.error("labelWidth" + labelWidth)
             let valX = label_x + labelWidth + (2 * modifier);
-            if (line.fixedValueX !== undefined) 
-            {
-                valX = line.fixedValueX;
+            
+            if(!renderStatValue(line.value, ctx, valX, lineY - 8)) {
+              ctx.fillText(line.value, valX, lineY); // Adjust the X coordinate as needed
             }
-            ctx.fillText(line.value, valX, lineY); // Adjust the X coordinate as needed
             
             // Draw little orange plus before label
             ctx.font = 'bold ' + (6 * modifier) + 'px Arial';
@@ -715,7 +814,11 @@ Copy the ID from the URL to the following text box.
       loadData()
     }
     
-    loadReqDigits("unused").then(()=> reload());
+    loadReqDigits("unused").then(()=> {
+        req = stat;
+        loadStatDigits("unused").then(()=> reload());
+      }
+    );
 
     function composeFields() {
       const textLines = [];
