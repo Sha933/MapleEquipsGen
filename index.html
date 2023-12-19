@@ -729,7 +729,7 @@ Copy the ID from the URL to the following text box.
             console.error("labelWidth" + labelWidth)
             let valX = label_x + labelWidth + (2 * modifier);
             
-            if(!renderStatValue(line.value, ctx, valX, lineY - 8)) {
+            if(!renderStatValue(line.value, ctx, valX, lineY - (8 * modifier))) {
               ctx.fillText(line.value, valX, lineY); // Adjust the X coordinate as needed
             }
             
