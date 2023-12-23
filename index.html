@@ -34,7 +34,7 @@ Copy the ID from the URL to the following text box.
 <br>
 <h2>STEP 2: Modify Title</h2>
 <span>
-  <Label>Applied Scrolls</Label>
+  <Label>Applied Scrolls:</Label>
   <input id="appliedScrolls" value="(+8)"  oninput="reload()">
 </span>
 <div>
@@ -43,6 +43,12 @@ Copy the ID from the URL to the following text box.
   <br>
   <label style="font-size: 11px"> Possible Values (css syntax): "yellow", "white", rgba(100,255,255), #FF6600 ...</label>
 </div>
+
+<span>
+  <Label>Owner Name (Item tag):</Label>
+  <input id="owner" value="Tiger"  oninput="reload()">
+</span>
+
 
 <h3>STEP 3: Modify Rarity</h3>
   <label><input type="radio" name="rarity" value="none" checked oninput="reload()">(none)</label> 
@@ -528,18 +534,31 @@ Copy the ID from the URL to the following text box.
         let fontSize = 12  * modifier;
         var titleColor = document.getElementById("titleColor").value;
 
+
+        let offset = 0;
+
+        // Owner Name (Item Tag)
+        let ownerText = document.getElementById("owner").value;
+        if (ownerText != "") {
+          ownerTextY_offset = offset;
+          offset += 18 * modifier;
+        }
+
         var appliedScrolls = document.getElementById("appliedScrolls").value;
         let itemNameText = megaJson.description.name +" " + appliedScrolls;
+        let itemNameTextY = offset + (22 * modifier);
+        var blueDotCenterY = offset + (17 * modifier);
         let itemNameTextX = 18 * modifier;
-        let itemNameTextY = 22 * modifier;
+        offset += 17 * modifier;
+
 
         // Orange Modifiers
         let rarityText = get_rarity();
-        let offset = 17 * modifier;
         rarityTextY_offset = offset;
         if (rarityText != "") {
           offset += 17 * modifier;
         }
+        
 
         // Orange Modifiers
         let orangeModifiersText = "";
@@ -597,9 +616,9 @@ Copy the ID from the URL to the following text box.
         ctx.font = `${fontSize}px Arial`;
         ctx.fillText(itemNameText, itemNameTextX, itemNameTextY);
 
-        // Draw small blue circle next to item name
+        // Draw small blue dot next to item name
         var centerX = 13 * modifier;
-        var centerY = 17 * modifier;
+        var centerY = blueDotCenterY;
         radius = 2.3 * modifier;
         var fillColor = "#55CCFF";
         // Draw the circle
@@ -610,6 +629,19 @@ Copy the ID from the URL to the following text box.
         ctx.fill();
         ctx.closePath();
         ctx.translate(+0.5, -0.5);
+
+        // OWNER NAME
+        if (ownerText != "") {
+          ctx.fillStyle = '#FF8811';
+          ctx.font = `bold ${fontSize}px Arial`;
+          ownerTextX = (canvas.width/2);
+          ownerTextY = ownerTextY_offset + (22 * modifier);
+          let lengthWithApo = ctx.measureText(ownerText +"'s").width;
+          let lengthWithoutApo = ctx.measureText(ownerText).width + (1 * modifier);
+          ctx.fillText(ownerText, ownerTextX - (lengthWithApo/2), ownerTextY);
+          ctx.fillStyle = 'white';
+          ctx.fillText("'s", ownerTextX - (lengthWithApo/2) + lengthWithoutApo, ownerTextY);
+        }
 
         // ITEM RARITY
         if (rarityText != "") {
