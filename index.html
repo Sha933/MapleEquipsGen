@@ -50,11 +50,13 @@ Copy the ID from the URL to the following text box.
 </span>
 
 
-<h3>STEP 3: Modify Rarity</h3>
+<h3>STEP 3: Modify Potential</h3>
   <label><input type="radio" name="rarity" value="none" checked oninput="reload()">(none)</label> 
-  <label><input type="radio" name="rarity" value="rare" oninput="reload()" checked> Rare</label>
+  <label><input type="radio" name="rarity" value="hidden" oninput="reload()"> Hidden</label>
+  <label><input type="radio" name="rarity" value="rare" oninput="reload()" > Rare</label>
   <label><input type="radio" name="rarity" value="unique" oninput="reload()"> Unique</label>
   <label><input type="radio" name="rarity" value="epic" oninput="reload()"> Epic</label>
+  <label><input type="radio" name="rarity" value="legendery" oninput="reload()"> Legendery</label>
 <br>
 
 <h3>STEP 4: Modify special coditions</h3>
@@ -303,13 +305,47 @@ Copy the ID from the URL to the following text box.
       var selectedRarity = document.querySelector('input[name="rarity"]:checked').value;
       var result = "";
 
-      if (selectedRarity === "rare") {
+      if (selectedRarity === "hidden") {
+        result = "(Hidden Potential Item)";
+      } else if (selectedRarity === "rare") {
         result = "(Rare Item)";
       } else if (selectedRarity === "unique") {
         result = "(Unique Item)";
       } else if (selectedRarity === "epic") {
         result = "(Epic Item)";
+      } else if (selectedRarity === "legendery") {
+        result = "(Legendery Item)";
       }
+      
+      return result;
+    }
+    function get_rarity_text_color() {
+      var selectedRarity = document.querySelector('input[name="rarity"]:checked').value;
+      var result = "";
+
+      result = "white";
+      if (selectedRarity === "hidden") {
+        result = "#FF0066";
+      }
+      return result;
+    }
+    
+    function get_rarity_border_color() {
+      var selectedRarity = document.querySelector('input[name="rarity"]:checked').value;
+      var result = "";
+
+      if (selectedRarity === "hidden") {
+        result = "#FF0066";
+      } else if (selectedRarity === "rare") {
+        result = "#55AAFF";
+      } else if (selectedRarity === "unique") {
+        result = "#FFCC00";
+      } else if (selectedRarity === "epic") {
+        result = "#CC66FF";
+      } else if (selectedRarity === "legendery") {
+        result = "#00FF00";
+      }
+      
       return result;
     }
 
@@ -600,8 +636,8 @@ Copy the ID from the URL to the following text box.
         let pixelWidth = 1 * modifier;
         let pixelHeight = 1 * modifier;
         backgroundCtx.translate(pixelWidth/2, pixelWidth/2);
-        backgroundCtx.strokeRect(2* modifier,1* modifier,canvas.width - (5 * modifier), 0)
-        backgroundCtx.strokeRect(1* modifier,2 * modifier,0, canvas.height - (5 * modifier))
+        backgroundCtx.strokeRect(2 * modifier, 1 * modifier,canvas.width - (5 * modifier), 0)
+        backgroundCtx.strokeRect(1 * modifier, 2 * modifier,0, canvas.height - (5 * modifier))
         backgroundCtx.strokeRect(2 * modifier,canvas.height - (2 * modifier), canvas.width - (5 * modifier), 0)
         backgroundCtx.strokeRect(canvas.width - (2 * modifier), 2 * modifier, 0, canvas.height - (5 * modifier))
         backgroundCtx.translate(-pixelWidth/2, -pixelWidth/2);
@@ -643,14 +679,26 @@ Copy the ID from the URL to the following text box.
           ctx.fillText("'s", ownerTextX - (lengthWithApo/2) + lengthWithoutApo, ownerTextY);
         }
 
-        // ITEM RARITY
+        // ITEM POTENTIAL
         if (rarityText != "") {
-          ctx.fillStyle = 'white';
+          ctx.fillStyle = get_rarity_text_color();
           ctx.font = `${fontSize}px Arial`;
           rarityTextX = (canvas.width/2);
           rarityTextY = rarityTextY_offset + (22 * modifier);
           let rarityLength = ctx.measureText(rarityText).width;
           ctx.fillText(rarityText, rarityTextX - (rarityLength/2), rarityTextY);
+
+          // DRAW POTENTIAL BORDER
+          ctx.strokeStyle = get_rarity_border_color();
+          let pixelWidth = 1 * modifier;
+          let pixelHeight = 1 * modifier;
+          ctx.translate(pixelWidth/2, pixelWidth/2);
+          ctx.strokeRect(4 * modifier, 4 * modifier,canvas.width - (9 * modifier), 0)
+          ctx.strokeRect(4 * modifier, 4 * modifier,0, canvas.height - (9 * modifier))
+          ctx.strokeRect(4 * modifier,canvas.height - (5 * modifier), canvas.width - (9 * modifier), 0)
+          ctx.strokeRect(canvas.width - (5 * modifier), 4 * modifier, 0, canvas.height - (9 * modifier))
+          ctx.translate(-pixelWidth/2, -pixelWidth/2);
+
         }
         
         // ORANGE TEXT MODIFIERS (Untradable, ...)
