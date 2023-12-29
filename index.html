@@ -26,138 +26,227 @@ Copy the ID from the URL to the following text box.
 <img src="tutorial1.png" height=""/>
 <br>
 <label>Item ID:</label>
-<input type="text" id="myTextbox" placeholder="Enter text" value="1382012">
+<input type="text" id="myTextbox" placeholder="Enter text" value="1332023">
 <!-- Button -->
 <button onclick="loadData()">Load Data</button>
 
 <br>
 <br>
 <h2>STEP 2: Modify Title</h2>
-<span>
-  <Label>Applied Scrolls:</Label>
-  <input id="appliedScrolls" value="(+8)"  oninput="reload()">
-</span>
-<div>
-  <Label>Item title color:</Label>
-  <input id="titleColor" value="yellow"  oninput="reload()">
-  <br>
-  <label style="font-size: 11px"> Possible Values (css syntax): "yellow", "white", rgba(100,255,255), #FF6600 ...</label>
-</div>
+<table>
+  <tr>
+    <td><Label style="margin-right: 10px;">Applied Scrolls:</Label></td>
+    <td><input id="appliedScrolls" value="(+5)"  oninput="redraw()"></td>
+  </tr>
+  <tr hidden>
+    <td><Label>Item title:</Label></td>
+    <td><input id="title" value="Placeholder" oninput="redraw()"></td>
+  </tr>
+  <tr>
+    <td><Label>Item title color:</Label></td>
+    <td><input id="titleColor" value="yellow"  oninput="redraw()"></td>
+    <tr>
+      <td colspan="2">
+      <label style="font-size: 11px"> Possible Values (css syntax): "yellow", "white", rgba(100,255,255), #FF6600 ...</label>
+      </td>
+    </tr>
+  </tr>
+  <tr>
+    <td><Label>Owner Name (Item tag):</Label></td>
+    <td><input id="owner" value="" oninput="redraw()"></td>
+  </tr>
+</table>
 
-<span>
-  <Label>Owner Name (Item tag):</Label>
-  <input id="owner" value="" oninput="reload()">
-</span>
+<div hidden>
+  <br>
+  <!-- Textbox 1 -->
+  <label for="reqLevelEquip">REQ Level:</label>
+  <input type="text" id="reqLevelEquip" value=""/>
+  <br>
+
+  <!-- Textbox 2 -->
+  <label for="reqSTR">REQ STR:</label>
+  <input type="text" id="reqSTR" value=""/>
+  <br>
+
+  <!-- Textbox 3 -->
+  <label for="reqDEX">REQ DEX:</label>
+  <input type="text" id="reqDEX" value=""/>
+  <br>
+
+  <!-- Textbox 4 -->
+  <label for="reqINT">REQ INT:</label>
+  <input type="text" id="reqINT" value=""/>
+  <br>
+
+  <!-- Textbox 5 -->
+  <label for="reqLUK">REQ LUK:</label>
+  <input type="text" id="reqLUK" value=""/>
+  <br>
+</div>
 
 
 <h3>STEP 3: Modify Potential</h3>
-  <label><input type="radio" name="rarity" value="none" checked oninput="reload()">(none)</label> 
-  <label><input type="radio" name="rarity" value="hidden" oninput="reload()"> Hidden</label>
-  <label><input type="radio" name="rarity" value="rare" oninput="reload()" > Rare</label>
-  <label><input type="radio" name="rarity" value="unique" oninput="reload()"> Unique</label>
-  <label><input type="radio" name="rarity" value="epic" oninput="reload()"> Epic</label>
-  <label><input type="radio" name="rarity" value="legendery" oninput="reload()"> Legendery</label>
+  <label><input type="radio" name="rarity" value="none" checked oninput="redraw()">(none)</label> 
+  <label><input type="radio" name="rarity" value="hidden" oninput="redraw()"> Hidden</label>
+  <label><input type="radio" name="rarity" value="rare" oninput="redraw()" checked> Rare</label>
+  <label><input type="radio" name="rarity" value="unique" oninput="redraw()"> Unique</label>
+  <label><input type="radio" name="rarity" value="epic" oninput="redraw()"> Epic</label>
+  <label><input type="radio" name="rarity" value="legendery" oninput="redraw()"> Legendery</label>
 <br>
 
 <h3>STEP 4: Modify special coditions</h3>
-<input type="checkbox" checked id="oneOfKind" oninput="reload()">
+<input type="checkbox" id="oneOfKind" oninput="redraw()">
 <label for="oneOfKind">One of a kind</label>
 <br>
-<input type="checkbox" checked id="untradeable" oninput="reload()">
+<input type="checkbox" id="untradeable" oninput="redraw()">
 <label for="untradeable">Untradeable</label>
 <br>
-<input type="checkbox" id="uniqueEquipped" oninput="reload()">
+<input type="checkbox" id="uniqueEquipped" oninput="redraw()">
 <label for="uniqueEquipped">Unique Equipped</label>
 
 
 <h2>STEP 5: Set allowed classes</h2>
-<input type="checkbox" checked id="beginner" oninput="reload()">
+<input type="checkbox" checked id="beginner" oninput="redraw()">
 <label for="beginner">Beginner</label>
-<input type="checkbox" checked id="warrior" oninput="reload()">
+<input type="checkbox" checked id="warrior" oninput="redraw()">
 <label for="warrior">Warrior</label>
-<input type="checkbox" checked id="magician" oninput="reload()">
+<input type="checkbox" checked id="magician" oninput="redraw()">
 <label for="magician">Magician</label>
-<input type="checkbox" checked id="bowman" oninput="reload()">
+<input type="checkbox" checked id="bowman" oninput="redraw()">
 <label for="bowman">Bowman</label>
-<input type="checkbox" checked id="thief" oninput="reload()">
+<input type="checkbox" checked id="thief" oninput="redraw()">
 <label for="thief">Thief</label>
-<input type="checkbox" checked id="pirate" oninput="reload()">
+<input type="checkbox" checked id="pirate" oninput="redraw()">
 <label for="pirate">Pirate</label>
 
 
 <h2>STEP 6: Modify Details</h2>
 <div class="input-pair-container">
   <span class="input-pair">
-    <input type="text" size="40" id="categoryLabel" class="label-input" value="CATEGORY" oninput="reload()">
-    <input type="text" id="category" value="HAT" class="value-input" oninput="reload()">
+    <input type="text" size="40" class="label-input" value="---" oninput="redraw()">
+    <input type="text" id="category" value="" class="value-input" oninput="redraw()">
   </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="strCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="strLabel" class="label-input" value="STR" oninput="reload()">
-  <input type="text" id="str" value="+25" class="value-input" oninput="reload()">
+    <input type="text" size="40" id="categoryLabel" class="label-input" value="CATEGORY" oninput="redraw()">
+    <input type="text" id="category" value="DAGGER" class="value-input" oninput="redraw()">
   </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="dexCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="dexLabel" class="label-input" value="DEX" oninput="reload()">
-  <input type="text" id="dex" value="+1" class="value-input" oninput="reload()">
+    <input type="checkbox" checked id="attackSpeedCheckbox"  class="checkbox-input"  oninput="redraw()">
+    <input type="text" size="40" id="attackSpeedLabel" class="label-input" value="ATTACK SPEED" oninput="redraw()">
+    <input type="text" id="attackSpeed" value="FAST" class="value-input" oninput="redraw()">
+  </span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" unchecked id="strCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="strLabel" class="label-input" value="STR" oninput="redraw()">
+  <input type="text" id="str" value="+25" class="value-input" oninput="redraw()">
+  </span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="dexCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="dexLabel" class="label-input" value="DEX" oninput="redraw()">
+  <input type="text" id="dex" value="+1" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="intCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="intLabel" class="label-input" value="INT" oninput="reload()">
-  <input type="text" id="int" value="+1" class="value-input" oninput="reload()">
+  <input type="checkbox" unchecked id="intCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="intLabel" class="label-input" value="INT" oninput="redraw()">
+  <input type="text" id="int" value="+1" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
-<input type="checkbox" checked id="lukCheckbox"  class="checkbox-input"  oninput="reload()">
-<input type="text" size="40" id="lukLabel" class="label-input" value="LUK" oninput="reload()">
-<input type="text" id="int" value="+1" class="value-input" oninput="reload()">
+<input type="checkbox" checked id="lukCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="lukLabel" class="label-input" value="LUK" oninput="redraw()">
+<input type="text" id="int" value="+9" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
-<input type="checkbox" checked id="hpCheckbox"  class="checkbox-input"  oninput="reload()">
-<input type="text" size="40" id="hpLabel" class="label-input" value="HP" oninput="reload()">
-<input type="text" id="int" value="10%" class="value-input" oninput="reload()">
+<input type="checkbox" unchecked id="hpCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="hpLabel" class="label-input" value="HP" oninput="redraw()">
+<input type="text" id="int" value="10%" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="weaponDefCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="weaponDefLabel" class="label-input" value="WEAPON DEF" oninput="reload()">
-  <input type="text" id="weaponDef" value="50" class="value-input" oninput="reload()">
+  <input type="checkbox" unchecked id="mpCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="mpLabel" class="label-input" value="MP" oninput="redraw()">
+  <input type="text" id="int" value="10%" class="value-input" oninput="redraw()">
+  </span>
+  <br>
+  <span class="input-pair">
+  <input type="checkbox" checked id="weaponAttackCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="weaponAttackLabel" class="label-input" value="WEAPON ATTACK" oninput="redraw()">
+  <input type="text" id="weaponAttack" value="114" class="value-input" oninput="redraw()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" unchecked id="magicAttackCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="magicAttackLabel" class="label-input" value="MAGIC ATTACK" oninput="redraw()">
+<input type="text" id="magicAttack" value="20" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="magicDefCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="magicDefLabel" class="label-input" value="MAGIC DEF" oninput="reload()">
-  <input type="text" id="magicDef" value="60" class="value-input" oninput="reload()">
+  <input type="checkbox" checked id="weaponDefCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="weaponDefLabel" class="label-input" value="WEAPON DEF" oninput="redraw()">
+  <input type="text" id="weaponDef" value="1" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="accuracyCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="accuracyLabel" class="label-input" value="ACCURACY" oninput="reload()">
-  <input type="text" id="accuracy" value="+20" class="value-input" oninput="reload()">
+  <input type="checkbox" unchecked id="magicDefCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="magicDefLabel" class="label-input" value="MAGIC DEF" oninput="redraw()">
+  <input type="text" id="magicDef" value="60" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="avoidabilityCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="avoidabilityLabel" class="label-input" value="AVOIDABILITY" oninput="reload()">
-  <input type="text" id="avoidability" value="+20" class="value-input" oninput="reload()">
+  <input type="checkbox" checked id="accuracyCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="accuracyLabel" class="label-input" value="ACCURACY" oninput="redraw()">
+  <input type="text" id="accuracy" value="+2" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="upgradesAvailableCheckbox"  class="checkbox-input"  oninput="reload()">
-  <input type="text" size="40" id="upgradesAvailableLabel" class="label-input" value="NUMBER OF UPGRADES AVAILABLE" oninput="reload()">
-  <input type="text" id="upgradesAvailable" value="0" class="value-input" oninput="reload()">
-  </div>
+  <input type="checkbox" unchecked id="avoidabilityCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="text" size="40" id="avoidabilityLabel" class="label-input" value="AVOIDABILITY" oninput="redraw()">
+  <input type="text" id="avoidability" value="+20" class="value-input" oninput="redraw()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="upgradesAvailableCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="upgradesAvailableLabel" class="label-input" value="NUMBER OF UPGRADES AVAILABLE" oninput="redraw()">
+<input type="text" id="upgradesAvailable" value="0" class="value-input" oninput="redraw()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="hammersAppliedCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="hammersAppliedLabel" class="label-input" value="NUMBER OF VICIOUS' HAMMER APPLIED" oninput="redraw()">
+<input type="text" id="hammersApplied" value="2" class="value-input" oninput="redraw()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="potentialSectionSeparatorCheckbox" class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="potentialSectionSeparatorLabel" class="label-input" value="---" oninput="redraw()">
+<input type="text" id="potentialSectionSeparator" value="" class="value-input" oninput="redraw()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="accuracyPotentialCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="accuracyPotentialLabel" class="label-input" value="ACCURACY" oninput="redraw()">
+<input type="text" id="accuracyPotential" value="+16" class="value-input" oninput="redraw()">
+</span>
+<br>
+<span class="input-pair">
+<input type="checkbox" checked id="avoidabilityPotentialCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="text" size="40" id="avoidabilityPotentialLabel" class="label-input" value="AVOIDABILITY" oninput="redraw()">
+<input type="text" id="avoidabilityPotential" value="+16" class="value-input" oninput="redraw()">
+</span>
 </div>
 
 
 <h2>STEP 7 (Optional): Change size</h2>
 
 <label>Scale:</label>
-<input type="text" id="scaleBox" value="1" oninput="reload()">
+<input type="text" id="scaleBox" value="1" oninput="redraw()">
 </br>
 
 <h2>STEP 8: Save</h2>
@@ -351,10 +440,103 @@ Copy the ID from the URL to the following text box.
 
     let required_str = 0;
 
+    
+    function setClassesCheckboxes(bitmask) {
+        if (bitmask == 0 || bitmask == undefined)
+        {
+          document.getElementById("beginner").checked = true;
+          bitmask = 0xffff;
+        }
+        else {
+          document.getElementById("beginner").checked = false;
+        }
+        // List of checkbox IDs
+        const checkboxIds = ['warrior', 'magician', 'bowman', 'thief', 'pirate'];
+
+        // Loop through each checkbox
+        for (let i = 0; i < checkboxIds.length; i++) {
+          const checkboxId = checkboxIds[i];
+          // Check if the corresponding bit is set in the bitmask
+          const isBitSet = (bitmask & (1 << i)) !== 0;
+          // Update the checkbox state based on the bitmask
+          document.getElementById(checkboxId).checked = isBitSet;
+        }
+      }
+
+    var itemImagePromise;
+    function loadItemImageAsync(url) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "Anonymous";
+
+        // Event handler for successful image loading
+        img.onload = function () {
+            console.error("Got item's image back from MS.io!");
+            resolve(img);
+        };
+
+        // Event handler for image loading errors
+        img.onerror = function () {
+            console.error("Failed to load the item's image.");
+            reject(new Error("Image loading failed."));
+        };
+
+        img.src = url;
+      });
+    }
+
+
+    function updateFieldsFromJson(megaJson) {
+      // Now after the background (blueish) and item-background (gray)
+      // are drawn, we can try to get the image from that other MS website
+      let imageUrl = 'https://maplestory.io/api/GMS/207.1.1/item/'+ megaJson.id +'/icon?resize=2'; // Replace with the path to your image
+      itemImagePromise = loadItemImageAsync(imageUrl)
+
+      document.getElementById("title").value = megaJson.description.name;
+      
+      console.error("megaJson.metaInfo.reqJob === " + megaJson.metaInfo.reqJob);
+      setClassesCheckboxes(megaJson.metaInfo.reqJob);
+
+      function setFieldValueById(fieldId, value) {
+          var fieldElement = document.getElementById(fieldId);
+
+          // Check if the element exists
+          if (fieldElement) {
+              // Set the value of the element
+              fieldElement.value = value;
+          } else {
+              // Handle the absence of the element as needed
+              console.error("Element with ID '" + fieldId + "' not found.");
+          }
+      }
+
+      // Copy values from megaJson properties to corresponding textboxes
+      setFieldValueById('reqLevelEquip', megaJson.metaInfo.reqLevelEquip);
+      setFieldValueById('reqSTR', megaJson.metaInfo.reqSTR);
+      setFieldValueById('reqDEX', megaJson.metaInfo.reqDEX);
+      setFieldValueById('reqINT', megaJson.metaInfo.reqINT);
+      setFieldValueById('reqLUK', megaJson.metaInfo.reqLUK);
+    }
 
 
 
-    function myFunction(megaJson) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function redraw() {
         console.error("myFunction entered!");
         const canvas = document.getElementById("myCanvas");
         let backGroundcanvas = document.getElementById("myCanvas");
@@ -459,30 +641,6 @@ Copy the ID from the URL to the following text box.
           return true;
         }
 
-        function setClassesCheckboxes(bitmask) {
-        if (bitmask == 0 || bitmask == undefined)
-        {
-          document.getElementById("beginner").checked = true;
-          bitmask = 0xffff;
-        }
-        else {
-          document.getElementById("beginner").checked = false;
-        }
-        // List of checkbox IDs
-        const checkboxIds = ['warrior', 'magician', 'bowman', 'thief', 'pirate'];
-
-        // Loop through each checkbox
-        for (let i = 0; i < checkboxIds.length; i++) {
-          const checkboxId = checkboxIds[i];
-          // Check if the corresponding bit is set in the bitmask
-          const isBitSet = (bitmask & (1 << i)) !== 0;
-          // Update the checkbox state based on the bitmask
-          document.getElementById(checkboxId).checked = isBitSet;
-        }
-      }
-
-        console.error("megaJson.metaInfo.reqJob ===" + megaJson.metaInfo.reqJob);
-        setClassesCheckboxes(megaJson.metaInfo.reqJob);
         let bgn_file = "bgn_" + get_yes_no("beginner") + ".png"
         let war_file = "war_" + get_yes_no("warrior") + ".png"
         let mag_file = "mag_" + get_yes_no("magician") + ".png"
@@ -581,7 +739,7 @@ Copy the ID from the URL to the following text box.
         }
 
         var appliedScrolls = document.getElementById("appliedScrolls").value;
-        let itemNameText = megaJson.description.name +" " + appliedScrolls;
+        let itemNameText = document.getElementById("title").value +" " + appliedScrolls;
         let itemNameTextY = offset + (22 * modifier);
         var blueDotCenterY = offset + (17 * modifier);
         let itemNameTextX = 18 * modifier;
@@ -617,9 +775,15 @@ Copy the ID from the URL to the following text box.
         }
 
         // Text information array
-        const textLines = composeFields()
+        var textLines = composeFields()
 
-        totalDynamicLengths = (textLines.length * 13 * modifier) + offset;
+        var separatorLinesCount = textLines.filter(obj => obj.label && obj.label.startsWith("---")).length;
+        var nonSeparatorLinesCount = textLines.length - separatorLinesCount;
+        console.log("separatorLinesCount: " + separatorLinesCount)
+        console.log("nonSeparatorLinesCount: " + nonSeparatorLinesCount)
+        totalDynamicLengths = (nonSeparatorLinesCount * 13 * modifier) +
+                              (separatorLinesCount * 6 * modifier) +
+                               offset;
 
 
         // -------------> ACTUAL DRAWING STARTS HERE <---------------------
@@ -729,70 +893,76 @@ Copy the ID from the URL to the following text box.
               statsImage.width * modifier,
               statsImage.height * modifier);
         }
+        
+        function getFieldValueById(fieldId) {
+            // Fetch the element with the specified ID
+            var fieldElement = document.getElementById(fieldId);
+
+            // Check if the element exists
+            if (fieldElement) {
+                // Return the value of the element
+                return fieldElement.value;
+            } else {
+                // Return a default value or handle the absence of the element
+                return '';
+            }
+        }
 
         // REQ LEVEL
         req_offset = offset
-        renderReqNumber(megaJson.metaInfo.reqLevelEquip, ctx, 
+        // Use the getFieldValueById function to get values from specific fields
+        renderReqNumber(getFieldValueById('reqLevelEquip'), ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
+
         // REQ STR
-        renderReqNumber(megaJson.metaInfo.reqSTR, ctx, 
+        renderReqNumber(getFieldValueById('reqSTR'), ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
+
         // REQ DEX
-        renderReqNumber(megaJson.metaInfo.reqDEX, ctx, 
+        renderReqNumber(getFieldValueById('reqDEX'), ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
+
         // REQ INT
-        renderReqNumber(megaJson.metaInfo.reqINT, ctx, 
+        renderReqNumber(getFieldValueById('reqINT'), ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
+
         // REQ LUK
-        renderReqNumber(megaJson.metaInfo.reqLUK, ctx, 
+        renderReqNumber(getFieldValueById('reqLUK'), ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
         req_offset += 12 * modifier;
-        // REQ FAME
+        // REQ FAME (TODO - NOT SUPPORTED YET)
         renderReqNumber(0, ctx, 
               /* x */ 144 * modifier,
               /* y */ req_offset + (15 * modifier))
 
-
-          // Now after the background (blueish) and item-background (gray)
-          // are drawn, we can try to get the image from that other MS website
-          const itemImage = new Image();
-          itemImage.crossOrigin = "Anonymous";
-          itemImage.onload = function() {
-            console.error("Got item's image back from MS.io!");
-            ctx.drawImage(itemImage,
-                          (45 - (itemImage.width/2)) * modifier,
-                          offset + (47 - (itemImage.height/2)) * modifier,
-                          itemImage.width  * modifier,
-                          itemImage.height  * modifier);
-          };
-          // Handle errors during image loading
-          itemImage.onerror = function() {
-            console.error("Failed to load the item's image.");
-          };
-          console.error(""+megaJson.id);
-          let imageUrl = 'https://maplestory.io/api/GMS/207.1.1/item/'+ megaJson.id +'/icon?resize=2'; // Replace with the path to your image
-          itemImage.src = imageUrl;
+        itemImagePromise.then((itemImage) => {
+        ctx.drawImage(itemImage,
+                        (45 - (itemImage.width/2)) * modifier,
+                        offset + (47 - (itemImage.height/2)) * modifier,
+                        itemImage.width  * modifier,
+                        itemImage.height  * modifier);
+        });
 
 
         // CLASSES INDICATORS
         do_classes((116 * modifier) + offset);
         
-        // WHITE SEPARATOR
-        ctx.fillStyle = 'white';
-        ctx.fillRect(6 * modifier, (135 * modifier) + offset, canvas.width - (12 * modifier), 1 * modifier); 
+        // WHITE SEPARATOR LINE -- OLD CODE. Now written in dynamic area
+        // ctx.fillStyle = 'white';
+        // ctx.fillRect(6 * modifier, (135 * modifier) + offset, canvas.width - (12 * modifier), 1 * modifier); 
 
         // Write DESCRIPTION (bottom area)
         // Set the initial Y coordinate
-        let lineY = 151 * modifier + offset;
+        let lineY = 142 * modifier + offset;
         // Iterate through the textLines array and draw each line
         //ctx.translate(0.5, 0.5);
         textLines.forEach(line => {
@@ -801,26 +971,41 @@ Copy the ID from the URL to the following text box.
             ctx.fillStyle = '#ffeecc'
             // Draw the label
             let label_x = 18 * modifier;
-            ctx.fillText(line.label, label_x, lineY);
-            // Draw the value
-            ctx.fillStyle = 'white'
-            ctx.font = `bold ${line.fontSize}px Arial`;
-            let labelWidth = Math.ceil(ctx.measureText(line.label).width);
-            console.error("labelWidth" + labelWidth)
-            let valX = label_x + labelWidth + (2 * modifier);
+
             
-            if(!renderStatValue(line.value, ctx, valX, lineY - (8 * modifier))) {
-              ctx.fillText(line.value, valX, lineY); // Adjust the X coordinate as needed
+            if (line.label.startsWith("---"))
+            {
+              // HACK TO DRAW A SEPARATOR LINE INSTEAD OF A FIELD
+              ctx.fillStyle = 'white';
+              ctx.fillRect(6 * modifier, lineY - (7 * modifier), canvas.width - (12 * modifier), 1 * modifier); 
+
+              // Update the Y coordinate for the next line
+              lineY += 9 * modifier; // You can adjust the spacing between lines as needed
             }
-            
-            // Draw little orange plus before label
-            ctx.font = 'bold ' + (6 * modifier) + 'px Arial';
-            ctx.fillStyle = '#FF6600'
-            ctx.translate(0.5, 0.5);
-            ctx.fillText("+", 9 * modifier, lineY - 2);
-            ctx.translate(-0.5, -0.5);
-            // Update the Y coordinate for the next line
-            lineY += 13 * modifier; // You can adjust the spacing between lines as needed
+            else {
+                // DRAW A REGULAR FIELD
+                ctx.fillText(line.label, label_x, lineY);
+                // Draw the value
+                ctx.fillStyle = 'white'
+                ctx.font = `bold ${line.fontSize}px Arial`;
+                let labelWidth = Math.ceil(ctx.measureText(line.label).width);
+                console.error("labelWidth" + labelWidth)
+                let valX = label_x + labelWidth + (2 * modifier);
+                
+                if(!renderStatValue(line.value, ctx, valX, lineY - (8 * modifier))) {
+                  ctx.fillText(line.value, valX, lineY); // Adjust the X coordinate as needed
+                }
+                
+                // Draw little orange plus before label
+                ctx.font = 'bold ' + (6 * modifier) + 'px Arial';
+                ctx.fillStyle = '#FF6600'
+                ctx.translate(0.5, 0.5);
+                ctx.fillText("+", 9 * modifier, lineY - 2);
+                ctx.translate(-0.5, -0.5);
+                
+                // Update the Y coordinate for the next line
+                lineY += 13 * modifier; // You can adjust the spacing between lines as needed
+            }
           });
 
 
@@ -859,9 +1044,6 @@ Copy the ID from the URL to the following text box.
       {
       // URL of the JSON endpoint (replace with the actual URL)
       const apiUrl = 'https://maplestory.io/api/GMS/207.1.1/item/' + itemNumber;
-  
-
-
 
       // Make a GET request to fetch the JSON data
       fetch(apiUrl)
@@ -874,7 +1056,8 @@ Copy the ID from the URL to the following text box.
         .then(data => {  
           // Do something with the name, for example, log it to the console
           console.log(`Name: ${name}`);
-          myFunction(data);
+          updateFieldsFromJson(data);
+          redraw();
           console.log(`myFunction returned`);
         })
         .catch(error => {
@@ -882,6 +1065,7 @@ Copy the ID from the URL to the following text box.
           console.error('Fetch error:', error);
         });
       }
+
     // Function to be called when the button is pressed
     function loadData() {
       // Get the value from the textbox
@@ -889,14 +1073,10 @@ Copy the ID from the URL to the following text box.
       // Call the "load" function with the textbox value as a parameter
       load(inputValue);
     }
-      
-    function reload() {
-      loadData()
-    }
     
-    loadReqDigits("unused").then(()=> {
+    loadReqDigits().then(()=> {
         req = stat;
-        loadStatDigits("unused").then(()=> reload());
+        loadStatDigits().then(()=> loadData());
       }
     );
 
