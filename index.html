@@ -55,6 +55,10 @@ Copy the ID from the URL to the following text box.
     <td><Label>Owner Name (Item tag):</Label></td>
     <td><input id="owner" value="" oninput="redraw()"></td>
   </tr>
+  <tr>
+    <td><Label>Star Force:</Label></td>
+    <td><input id="starforce" value="0" oninput="redraw()"></td>
+  </tr>
 </table>
 
 <div hidden>
@@ -326,6 +330,8 @@ Copy the ID from the URL to the following text box.
 
 
   <script>
+    let starImage = new Image();
+    starImage.src = 'star.png';
 
     let stat = [];
     count_stat = 0;
@@ -731,6 +737,14 @@ Copy the ID from the URL to the following text box.
 
         let offset = 0;
 
+        // Star Force upgrades
+        let starforceCount = parseInt(document.getElementById("starforce").value);
+        if (starforceCount > 0) {
+          starforceY_offset = offset;
+          offset += 18 * modifier;
+        }
+        
+
         // Owner Name (Item Tag)
         let ownerText = document.getElementById("owner").value;
         if (ownerText != "") {
@@ -779,8 +793,6 @@ Copy the ID from the URL to the following text box.
 
         var separatorLinesCount = textLines.filter(obj => obj.label && obj.label.startsWith("---")).length;
         var nonSeparatorLinesCount = textLines.length - separatorLinesCount;
-        console.log("separatorLinesCount: " + separatorLinesCount)
-        console.log("nonSeparatorLinesCount: " + nonSeparatorLinesCount)
         totalDynamicLengths = (nonSeparatorLinesCount * 13 * modifier) +
                               (separatorLinesCount * 6 * modifier) +
                                offset;
@@ -829,6 +841,21 @@ Copy the ID from the URL to the following text box.
         ctx.fill();
         ctx.closePath();
         ctx.translate(+0.5, -0.5);
+
+        // STAR FORCE UPGRADES
+        if (starforceCount > 0) {
+          starforceY = starforceY_offset + (10 * modifier);
+          totalWidth = starImage.width * modifier * starforceCount;
+          starforceX = (canvas.width/2) - totalWidth/2;
+          console.log("[STAR FORCE] totalWidth: " + totalWidth);
+          console.log("[STAR FORCE] (canvas.width/2): " + (canvas.width/2));
+          console.log("[STAR FORCE] starforceX: " + starforceX);
+          currX = starforceX;
+          for (let i = 0; i < starforceCount; i++) {
+            ctx.drawImage(starImage, currX, starforceY);
+            currX += starImage.width * modifier;
+          }
+        }
 
         // OWNER NAME
         if (ownerText != "") {
@@ -989,7 +1016,6 @@ Copy the ID from the URL to the following text box.
                 ctx.fillStyle = 'white'
                 ctx.font = `bold ${line.fontSize}px Arial`;
                 let labelWidth = Math.ceil(ctx.measureText(line.label).width);
-                console.error("labelWidth" + labelWidth)
                 let valX = label_x + labelWidth + (2 * modifier);
                 
                 if(!renderStatValue(line.value, ctx, valX, lineY - (8 * modifier))) {
@@ -1058,7 +1084,6 @@ Copy the ID from the URL to the following text box.
           console.log(`Name: ${name}`);
           updateFieldsFromJson(data);
           redraw();
-          console.log(`myFunction returned`);
         })
         .catch(error => {
           // Handle errors during the fetch operation
