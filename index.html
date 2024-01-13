@@ -333,6 +333,8 @@ Copy the ID from the URL to the following text box.
 
 
   <script>
+    let megaJsonGlobal = null;
+
     let starImage = new Image();
     starImage.src = 'star.png';
 
@@ -496,6 +498,7 @@ Copy the ID from the URL to the following text box.
 
 
     function updateFieldsFromJson(megaJson) {
+      megaJsonGlobal = megaJson;
       // Now after the background (blueish) and item-background (gray)
       // are drawn, we can try to get the image from that other MS website
       let imageUrl = 'https://maplestory.io/api/GMS/207.1.1/item/'+ megaJson.id +'/icon?resize=2'; // Replace with the path to your image
@@ -981,11 +984,16 @@ Copy the ID from the URL to the following text box.
               /* y */ req_offset + (15 * modifier))
 
         itemImagePromise.then((itemImage) => {
-        ctx.drawImage(itemImage,
-                        (45 - (itemImage.width/2)) * modifier,
-                        offset + (47 - (itemImage.height/2)) * modifier,
-                        itemImage.width  * modifier,
-                        itemImage.height  * modifier);
+          let iconOrigin_x = megaJsonGlobal.metaInfo.iconOrigin.value.x;
+          let iconOrigin_y = megaJsonGlobal.metaInfo.iconOrigin.value.y;
+          console.log(megaJsonGlobal.metaInfo.iconOrigin);
+          console.log(iconOrigin_x);
+          console.log(iconOrigin_y);
+          ctx.drawImage(itemImage,
+                        (12 - (iconOrigin_x * 2)) * modifier,
+                        (98 - (iconOrigin_y * 2)) * modifier,
+                        itemImage.width * modifier,
+                        itemImage.height * modifier);
         });
 
 
