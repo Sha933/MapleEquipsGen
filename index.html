@@ -108,6 +108,9 @@ Copy the ID from the URL to the following text box.
 <br>
 <input type="checkbox" id="uniqueEquipped" oninput="redraw()">
 <label for="uniqueEquipped">Unique Equipped</label>
+<br>
+<input type="checkbox" id="questItem" oninput="redraw()">
+<label for="questItem">Quest Item</label>
 
 
 <h2>STEP 5: Set allowed classes</h2>
@@ -783,6 +786,12 @@ Copy the ID from the URL to the following text box.
             orangeModifiersText += ", "
           orangeModifiersText += "Unique Equipped Item";
         }
+        if (document.getElementById("questItem").checked) {
+          if (orangeModifiersText != "")
+            orangeModifiersText += ", "
+          orangeModifiersText += "Quest Item";
+        }
+        
         orangeModifiersTextY_offset = offset;
         if (orangeModifiersText != "") {
           offset += 17 * modifier;
