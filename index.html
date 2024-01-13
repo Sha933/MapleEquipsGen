@@ -26,7 +26,7 @@ Copy the ID from the URL to the following text box.
 <img src="tutorial1.png" height=""/>
 <br>
 <label>Item ID:</label>
-<input type="text" id="myTextbox" placeholder="Enter text" value="1332023">
+<input type="text" id="myTextbox" placeholder="Enter text" value="1002419">
 <!-- Button -->
 <button onclick="loadData()">Load Data</button>
 
@@ -36,7 +36,7 @@ Copy the ID from the URL to the following text box.
 <table>
   <tr>
     <td><Label style="margin-right: 10px;">Applied Scrolls:</Label></td>
-    <td><input id="appliedScrolls" value="(+5)"  oninput="redraw()"></td>
+    <td><input id="appliedScrolls" value="(+1)"  oninput="redraw()"></td>
   </tr>
   <tr hidden>
     <td><Label>Item title:</Label></td>
@@ -93,7 +93,7 @@ Copy the ID from the URL to the following text box.
 <h3>STEP 3: Modify Potential</h3>
   <label><input type="radio" name="rarity" value="none" checked oninput="redraw()">(none)</label> 
   <label><input type="radio" name="rarity" value="hidden" oninput="redraw()"> Hidden</label>
-  <label><input type="radio" name="rarity" value="rare" oninput="redraw()" checked> Rare</label>
+  <label><input type="radio" name="rarity" value="rare" oninput="redraw()"> Rare</label>
   <label><input type="radio" name="rarity" value="unique" oninput="redraw()"> Unique</label>
   <label><input type="radio" name="rarity" value="epic" oninput="redraw()"> Epic</label>
   <label><input type="radio" name="rarity" value="legendery" oninput="redraw()"> Legendery</label>
@@ -137,19 +137,19 @@ Copy the ID from the URL to the following text box.
   <br>
   <span class="input-pair">
     <input type="text" size="40" id="categoryLabel" class="label-input" value="CATEGORY" oninput="redraw()">
-    <input type="text" id="category" value="DAGGER" class="value-input" oninput="redraw()">
+    <input type="text" id="category" value="HAT" class="value-input" oninput="redraw()">
   </span>
   <br>
   <span class="input-pair">
-    <input type="checkbox" checked id="attackSpeedCheckbox"  class="checkbox-input"  oninput="redraw()">
+    <input type="checkbox" id="attackSpeedCheckbox"  class="checkbox-input"  oninput="redraw()">
     <input type="text" size="40" id="attackSpeedLabel" class="label-input" value="ATTACK SPEED" oninput="redraw()">
     <input type="text" id="attackSpeed" value="FAST" class="value-input" oninput="redraw()">
   </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" unchecked id="strCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="checkbox" checked id="strCheckbox"  class="checkbox-input"  oninput="redraw()">
   <input type="text" size="40" id="strLabel" class="label-input" value="STR" oninput="redraw()">
-  <input type="text" id="str" value="+25" class="value-input" oninput="redraw()">
+  <input type="text" id="str" value="+1" class="value-input" oninput="redraw()">
   </span>
   <br>
   <span class="input-pair">
@@ -159,7 +159,7 @@ Copy the ID from the URL to the following text box.
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" unchecked id="intCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="checkbox" checked id="intCheckbox"  class="checkbox-input"  oninput="redraw()">
   <input type="text" size="40" id="intLabel" class="label-input" value="INT" oninput="redraw()">
   <input type="text" id="int" value="+1" class="value-input" oninput="redraw()">
 </span>
@@ -167,7 +167,7 @@ Copy the ID from the URL to the following text box.
 <span class="input-pair">
 <input type="checkbox" checked id="lukCheckbox"  class="checkbox-input"  oninput="redraw()">
 <input type="text" size="40" id="lukLabel" class="label-input" value="LUK" oninput="redraw()">
-<input type="text" id="int" value="+9" class="value-input" oninput="redraw()">
+<input type="text" id="int" value="+1" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
@@ -183,7 +183,7 @@ Copy the ID from the URL to the following text box.
   </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="weaponAttackCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="checkbox" unchecked id="weaponAttackCheckbox"  class="checkbox-input"  oninput="redraw()">
   <input type="text" size="40" id="weaponAttackLabel" class="label-input" value="WEAPON ATTACK" oninput="redraw()">
   <input type="text" id="weaponAttack" value="114" class="value-input" oninput="redraw()">
 </span>
@@ -197,7 +197,7 @@ Copy the ID from the URL to the following text box.
   <span class="input-pair">
   <input type="checkbox" checked id="weaponDefCheckbox"  class="checkbox-input"  oninput="redraw()">
   <input type="text" size="40" id="weaponDefLabel" class="label-input" value="WEAPON DEF" oninput="redraw()">
-  <input type="text" id="weaponDef" value="1" class="value-input" oninput="redraw()">
+  <input type="text" id="weaponDef" value="15" class="value-input" oninput="redraw()">
 </span>
   <br>
   <span class="input-pair">
@@ -207,7 +207,7 @@ Copy the ID from the URL to the following text box.
 </span>
   <br>
   <span class="input-pair">
-  <input type="checkbox" checked id="accuracyCheckbox"  class="checkbox-input"  oninput="redraw()">
+  <input type="checkbox" unchecked id="accuracyCheckbox"  class="checkbox-input"  oninput="redraw()">
   <input type="text" size="40" id="accuracyLabel" class="label-input" value="ACCURACY" oninput="redraw()">
   <input type="text" id="accuracy" value="+2" class="value-input" oninput="redraw()">
 </span>
@@ -221,29 +221,29 @@ Copy the ID from the URL to the following text box.
 <span class="input-pair">
 <input type="checkbox" checked id="upgradesAvailableCheckbox"  class="checkbox-input"  oninput="redraw()">
 <input type="text" size="40" id="upgradesAvailableLabel" class="label-input" value="NUMBER OF UPGRADES AVAILABLE" oninput="redraw()">
-<input type="text" id="upgradesAvailable" value="0" class="value-input" oninput="redraw()">
+<input type="text" id="upgradesAvailable" value="6" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
 <input type="checkbox" checked id="hammersAppliedCheckbox"  class="checkbox-input"  oninput="redraw()">
 <input type="text" size="40" id="hammersAppliedLabel" class="label-input" value="NUMBER OF VICIOUS' HAMMER APPLIED" oninput="redraw()">
-<input type="text" id="hammersApplied" value="2" class="value-input" oninput="redraw()">
+<input type="text" id="hammersApplied" value="0" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
-<input type="checkbox" checked id="potentialSectionSeparatorCheckbox" class="checkbox-input"  oninput="redraw()">
+<input type="checkbox" unchecked id="potentialSectionSeparatorCheckbox" class="checkbox-input"  oninput="redraw()">
 <input type="text" size="40" id="potentialSectionSeparatorLabel" class="label-input" value="---" oninput="redraw()">
 <input type="text" id="potentialSectionSeparator" value="" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
-<input type="checkbox" checked id="accuracyPotentialCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="checkbox" unchecked id="accuracyPotentialCheckbox"  class="checkbox-input"  oninput="redraw()">
 <input type="text" size="40" id="accuracyPotentialLabel" class="label-input" value="ACCURACY" oninput="redraw()">
 <input type="text" id="accuracyPotential" value="+16" class="value-input" oninput="redraw()">
 </span>
 <br>
 <span class="input-pair">
-<input type="checkbox" checked id="avoidabilityPotentialCheckbox"  class="checkbox-input"  oninput="redraw()">
+<input type="checkbox" unchecked id="avoidabilityPotentialCheckbox"  class="checkbox-input"  oninput="redraw()">
 <input type="text" size="40" id="avoidabilityPotentialLabel" class="label-input" value="AVOIDABILITY" oninput="redraw()">
 <input type="text" id="avoidabilityPotential" value="+16" class="value-input" oninput="redraw()">
 </span>
