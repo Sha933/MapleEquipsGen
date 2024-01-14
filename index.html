@@ -864,7 +864,7 @@ Copy the ID from the URL to the following text box.
           console.log("[STAR FORCE] starforceX: " + starforceX);
           currX = starforceX;
           for (let i = 0; i < starforceCount; i++) {
-            ctx.drawImage(starImage, currX, starforceY);
+            ctx.drawImage(starImage, currX, starforceY, starImage.width * modifier, starImage.height * modifier);
             currX += starImage.width * modifier;
           }
         }
